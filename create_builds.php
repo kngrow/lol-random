@@ -1,37 +1,42 @@
 <?php
 
-require './Encryption.php';
 require './RandomClass.php';
 
-$converter = new Encryption;
-$encoded = $converter->encode(serialize($str));
-$decoded = $converter->decode($encoded);
-
-// var_dump($encoded);
-
-echo "<hr>";
-
 $rc = new RandomClass();
-$rc->champ(4);
-$rc->build('aa');
-
-// var_dump($rc->build);
-
+if ($_GET['hash']) {
+  $random_list = $rc->decode($_GET['hash']);
+  $url = $_GET['hash'];
+} else {
+  $rc->create_random_builds(10,'sf');
+  $rc->createJsonData();
+  $rc->createUrl();
+  $random_list = $rc->builds;
+  $url = $rc->urlid;
+}
+// echo json_encode($random_list);exit;
 ?>
+<textarea  rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?>
+</textarea>
+<hr>
 
-
-<?php foreach ($rc->build as $key => $value): ?>
-  <div class="" style="width:100%">
-    <!-- <img src="http://ddragon.leagueoflegends.com/cdn/7.12.1/img/item/<?= $key ?>.png" alt="<?= $value['name'] ?>"> -->
-    <div style="height:<?= $value['image']['h'] ?>px; width:<?= $value['image']['w'] ?>px; background: url('//ddragon.leagueoflegends.com/cdn/7.12.1/img/sprite/<?= $value['image']['sprite'] ?>') -<?= $value['image']['x'] ?>px -<?= $value['image']['y'] ?>px no-repeat;">
-
+<?php foreach ($random_list as $name => $champ): ?>
+  <div class="width:100%;">
+    <div class="">
+      <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/champion/<?= $champ['champ']['image']['full'] ?>" alt="">
+      <span><?= $name ?></span>
     </div>
-    <span><?= $value['name'] ?></span>
-    <p>
-      <?php foreach ($value['from'] as $k => $v): ?>
-        <img src="http://ddragon.leagueoflegends.com/cdn/7.12.1/img/item/<?= $v ?>.png" style="width:40px" >
+    <?php foreach ($champ['build'] as $key => $value): ?>
+      <div class="items" style="display  : inline-block; width:15%">
+      <div style="height:<?= $value['image']['h'] ?>px; width:<?= $value['image']['w'] ?>px; background: url('//ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/sprite/<?= $value['image']['sprite'] ?>') -<?= $value['image']['x'] ?>px -<?= $value['image']['y'] ?>px no-repeat;">
+      </div>
+      <span><?= $value['name'] ?></span>
+      <p>
+        <?php foreach ($value['from'] as $k => $v): ?>
+          <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/item/<?= $v ?>.png" style="width:40px" >
 
-      <?php endforeach; ?>
-    </p>
-  </div>
+        <?php endforeach; ?>
+      </p>
+    </div>
+    <?php endforeach; ?>
+  <hr>
 <?php endforeach; ?>
