@@ -15,13 +15,21 @@ if ($_GET['hash']) {
 }
 // echo json_encode($random_list);exit;
 ?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
 <textarea  rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?>
 </textarea>
 <hr>
 
 <?php foreach ($random_list as $name => $champ): ?>
-  <div class="width:100%;">
-    <div class="">
+  <div class="builds">
+    <div class="champ">
       <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/champion/<?= $champ['champ']['image']['full'] ?>" alt="">
       <span><?= $name ?></span>
     </div>
@@ -38,5 +46,9 @@ if ($_GET['hash']) {
       </p>
     </div>
     <?php endforeach; ?>
+  </div>
   <hr>
 <?php endforeach; ?>
+
+</body>
+</html>
