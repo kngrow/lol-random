@@ -27,6 +27,7 @@ if ($_GET['hash']) {
 </textarea>
 <hr>
 
+<?php if($random_list): ?>
 <?php foreach ($random_list as $name => $champ): ?>
   <div class="builds">
     <div class="champ">
@@ -49,6 +50,9 @@ if ($_GET['hash']) {
   </div>
   <hr>
 <?php endforeach; ?>
+<?php else: ?>
+存在しないデータっす 
+<?php endif; ?>
 
 </body>
 </html>

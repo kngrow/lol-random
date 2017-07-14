@@ -8,10 +8,12 @@
     public $builds = null;
     public $version ;
     public $region ;
+    // 別に見られても問題ナッシング
     private $key = "qwertyuiopasdfghj";
 
     function __construct(){
         $this->get_version();
+        $this->get_data();
     }
     /**
      * バージョンとかサーバーとか取ってくるやつ
@@ -20,22 +22,35 @@
     public function get_version (){
         $url = "https://ddragon.leagueoflegends.com/realms/jp.json";
         $data = file_get_contents($url);
-        // var_dump($data);
         $versions = json_decode($data , true);
         $this->version = $versions['v'];
         $this->region = $versions['l'];
     }
+    /**
+     * APIからデータを取ってきて置いとく
+     */
+    public function get_data(){
+      $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
+      $this->ori_item = json_decode($data,true);
+      $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
+      $data = file_get_contents($url);
+      $this->ori_champ = json_decode($data,true);
+    }
+    /**
+     * メンバーとマップを選んでランダムにするやつ（大元
+     */
     public function create_random_builds($menber, $map){
       $champs = $this->random_champ($menber);
       $buld = [];
       foreach ($champs as $champ ) {
-        // var_dump($this->build($champ['id'], $map));
-        // exit;
         $buld[$champ['name']]['build'] = $this->build($champ['id'], $map);
         $buld[$champ['name']]['champ'] = $champ;
       }
       $this->builds = $buld;
     }
+    /**
+     * 作ったランダムのリストからhashにさせるjsonのリストを作成する
+     */
     public function createJsonData()
     {
       $build = $this->builds;
@@ -49,18 +64,28 @@
       }
       return false;
     }
+    /**
+     * 作ったbuildsのjsondata から共有用のhashを作成する
+     */
     public function createUrl()
     {
-      $list = self::createJsonData();
+      $list = $this->createJsonData();
       if ($list) {
         $c_t = (openssl_encrypt(gzcompress(json_encode($list),2), 'AES-128-CBC', $this->key,0,$this->key));
         $this->urlid = $c_t;
       }
     }
+    /**
+     * hashからjsonにもどして、データをもどすやつ
+     */
     public function decode($hash)
     {
       $small = $this->decodeUrl($hash);
-      return $this->decodeData($small);
+      if($small){
+          return $this->decodeData($small);
+      } else {
+          return false;
+      }
     }
     public function decodeUrl($hash)
     {
@@ -70,11 +95,8 @@
     public function decodeData($small){
       $small = json_decode($small,true);
       $i = 0;
-      $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
-      $ori_item = json_decode($data,true);
-      $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
-      $data = file_get_contents($url);
-      $ori_champ = json_decode($data,true);
+      $ori_item = $this->ori_item;
+      $ori_champ = $this->ori_champ;
       foreach ($small as $champ => $item) {
         $cm = $ori_champ['data'][$champ];
         $list[$cm['name']]['champ'] = [
@@ -85,8 +107,7 @@
         $arr = [];
         foreach ($item as $k) {
           $it = $ori_item['data'][$k];
-          // var_dump($it);exit;
-          $arr[$k] =[
+          $arr[$k] = [
                   'name' => $it['name'],
                   'id' => $it[$item_id],
                   'from' => $it['from'],
@@ -104,10 +125,7 @@
      * @return [type]          [description]
      */
     public function random_champ($menber = 5){
-        $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
-        $data = file_get_contents($url);
-        $data = json_decode($data,true);
-        $this->ori_champ = $data;
+        $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
         $champs = [];
         foreach ($d as $key => $value) {
@@ -134,8 +152,7 @@
       }else {
         $map_id = 11;
       }
-      $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
-      $data = json_decode($data,true);
+      $data = $this->ori_item;
       $boot_list = [];
       $item_list = [];
       foreach($data['data'] as $key => $value){
@@ -207,25 +224,7 @@
 
         }
       }
-      // $boots = [
-      //   "3006",
-      //   "3047",
-      //   "3020",
-      //   "3158",
-      //   "3111",
-      //   "3117",
-      //   "3009"
-      // ];
-      // $counter = 0;
-      // foreach ($boots as $key => $value) {
-      //   if (in_array($val , $item)) {
-      //     $counter++;
-      //   }
-      // }
-      // if ($counter > 2) {
-      //   var_dump($build);
-      // }
-      return $item;
+     return $item;
     }
   }
 
