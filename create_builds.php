@@ -29,8 +29,9 @@ if (isset($_GET['hash'])) {
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-<textarea  rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?>
+<textarea id="url" rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?>
 </textarea>
+<button class="btn" data-clipboard-target="#url" data-copied-hint="Copied!" > copy!</button>
 <hr>
 
 <?php if($random_list): ?>
@@ -60,8 +61,8 @@ if (isset($_GET['hash'])) {
 存在しないデータっす 
 <?php endif; ?>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-<script>
-</script>
+<script src="./js/script.js"></script>
 </body>
 </html>
