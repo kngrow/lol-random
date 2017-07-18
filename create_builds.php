@@ -3,15 +3,21 @@
 require './RandomClass.php';
 
 $rc = new RandomClass();
-if ($_GET['hash']) {
+if (isset($_GET['hash'])) {
   $random_list = $rc->decode($_GET['hash']);
   $url = $_GET['hash'];
-} else {
-  $rc->create_random_builds(10,'sf');
-  $rc->createJsonData();
-  $rc->createUrl();
-  $random_list = $rc->builds;
-  $url = $rc->urlid;
+} else if( isset( $_POST['menber'] ) && isset( $_POST['map'] ) ) {
+// } else {
+    $number = $_POST['menber'] + 0;
+    $map = $_POST['map'];
+    if( is_numeric( $number ) && ($number > 0 && $number <= 10 ) && ( $map == 'sf' || $map == 'ha'  ) ){
+      $rc->create_random_builds($number,$map);
+      // $rc->create_random_builds(4,'sf');
+      $rc->createJsonData();
+      $rc->createUrl();
+      $random_list = $rc->builds;
+      $url = $rc->urlid;
+    }
 }
 // echo json_encode($random_list);exit;
 ?>
@@ -54,5 +60,8 @@ if ($_GET['hash']) {
 存在しないデータっす 
 <?php endif; ?>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<script>
+</script>
 </body>
 </html>

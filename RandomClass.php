@@ -9,7 +9,7 @@
     public $version ;
     public $region ;
     // 別に見られても問題ナッシング
-    private $key = "qwertyuiopasdfghj";
+    private $key = "qawsedrftgyhujikolp";
 
     function __construct(){
         $this->get_version();
@@ -127,6 +127,11 @@
     public function random_champ($menber = 5){
         $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
+        if( ! is_array($d) ){
+            $tmp = [];
+            $tmp[] = $d;
+            $d = $tmp;
+        }
         $champs = [];
         foreach ($d as $key => $value) {
           $cm = $data['data'][$value];
