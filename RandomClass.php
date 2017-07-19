@@ -192,9 +192,7 @@
                       continue;
                     }
                     if ( isset($value['requiredChampion']) ) {
-                      // if ($value['requiredChampion'] == "Gangplank") {
                         continue;
-                      // }
                     }
                     if (in_array('Boots',$value['tags'])){
                       $boot_list[] = $key;
@@ -205,8 +203,24 @@
               }
           }
       }
-      $build = array_rand($item_list,5);
-      $build['boots'] = array_rand($boot_list);
+      if($champ === 'Victor'){
+          $build = array_rand($item_list,4);
+          $tmp = $data['data'][3198];
+          $arr = [
+            'name' => $tmp['name'],
+            'id' => $item_list[$item_id],
+            'from' => $tmp['from'],
+            'image' => $tmp['image'],
+          ];
+          $item[$item_list[$item_id]] = $arr;
+      } else if($champ === 'Cassiopeia'){
+          $build = array_rand($item_list,6);
+      } else {
+          $build = array_rand($item_list,5);
+      }
+      if($champ !== 'Cassiopeia'){
+          $build['boots'] = array_rand($boot_list);
+      }
       foreach($build as $k => $item_id){
         if ($k === "boots") {
           $boots = $data['data'][$boot_list[$item_id]];
@@ -226,12 +240,9 @@
             'image' => $tmp['image'],
           ];
           $item[$item_list[$item_id]] = $arr;
-
         }
       }
      return $item;
     }
   }
 
-
- ?>
