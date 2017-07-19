@@ -1,0 +1,31 @@
+body {
+    .wrapper {
+        margin: 0 auto ;
+        width : 80%;
+        form {
+            border : 1px solid;
+            .form_parts {
+                text-align : center;
+                h3 {
+                    margin : 0;
+                    text-align: left;
+                }
+            }
+            .submit_wrapper{
+                text-align : center;
+                button {
+                        margin: 0 auto;
+                        width : 70px;
+                        display: inline-block;
+                        font-weight: bold;
+                        text-decoration: none;
+                        background: #ECECEC;
+                        transition: .4s;
+                }
+            }
+        }
+    }
+    .red {
+        color : red;
+    }
+}
