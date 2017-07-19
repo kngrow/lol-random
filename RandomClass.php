@@ -155,7 +155,7 @@
       if ($map == 'sf') {
         $map_id = 11;
       }else {
-        $map_id = 11;
+        $map_id = 12;
       }
       $data = $this->ori_item;
       $boot_list = [];
@@ -163,42 +163,50 @@
       foreach($data['data'] as $key => $value){
           if ( !isset($value['inStore']) && !isset($value['hideFromAll']) ){
               if ( !isset($value['into']) || ( $value['into'][0]) == 0  ){
-                  if($map_id == 11 && $value['maps'][11]){
-                    if (in_array('Trinket' , $value['tags'])) {
+                  if($map_id === 11 ){
+                    if ( !$value['maps'][11]  ) {
                       continue;
                     }
-                    if (in_array('Vision' , $value['tags'])) {
+                  }
+                  if($map_id === 12 ){
+                    if ( !$value['maps'][12]  ) {
                       continue;
                     }
-                    if (strpos($value['name'],'エリクサー') !== false) {
+                  }
+                  if (in_array('Trinket' , $value['tags'])) {
+                    continue;
+                  }
+                  if (in_array('Vision' , $value['tags'])) {
+                    continue;
+                  }
+                  if (strpos($value['name'],'エリクサー') !== false) {
+                    continue;
+                  }
+                  if (strpos($value['name'],'ドラン') !== false) {
+                    continue;
+                  }
+                  if (strpos($value['name'],'クイックチャージ') !== false) {
+                    continue;
+                  }
+                  if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){
+                    continue;
+                  }
+                  if(isset($value['stacks'])){
+                    continue;
+                  }
+                  // TODO: ハンターポーション
+                  // こラフトポーション
+                  // カル
+                  if ($key == 2032 || $key == 2033 ||  $key == 1083) {
+                    continue;
+                  }
+                  if ( isset($value['requiredChampion']) ) {
                       continue;
-                    }
-                    if (strpos($value['name'],'ドラン') !== false) {
-                      continue;
-                    }
-                    if (strpos($value['name'],'クイックチャージ') !== false) {
-                      continue;
-                    }
-                    if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){
-                      continue;
-                    }
-                    if(isset($value['stacks'])){
-                      continue;
-                    }
-                    // TODO: ハンターポーション
-                    // こラフトポーション
-                    // カル
-                    if ($key == 2032 || $key == 2033 ||  $key == 1083) {
-                      continue;
-                    }
-                    if ( isset($value['requiredChampion']) ) {
-                        continue;
-                    }
-                    if (in_array('Boots',$value['tags'])){
-                      $boot_list[] = $key;
-                    } else {
-                      $item_list[] = $key;
-                    }
+                  }
+                  if (in_array('Boots',$value['tags'])){
+                    $boot_list[] = $key;
+                  } else {
+                    $item_list[] = $key;
                   }
               }
           }
@@ -245,4 +253,3 @@
      return $item;
     }
   }
-
