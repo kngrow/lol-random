@@ -1,3 +1,7 @@
+
+$green : #185421;
+
+
 body {
     .wrapper {
         margin: 0 auto ;
@@ -14,16 +18,37 @@ body {
             .submit_wrapper{
                 text-align : center;
                 button {
-                        margin: 0 auto;
-                        width : 70px;
                         display: inline-block;
-                        font-weight: bold;
-                        text-decoration: none;
-                        background: #ECECEC;
-                        transition: .4s;
+                        padding: 0 0 0 10px;
+                        height: 50px;
+                        width: 200px;
+                        position: relative;
+                        font-size: 20px;
+                        background: $green;
+                        border: 0;
+                        &::before{
+                                content: ' ';
+                                height: 0;
+                                position: absolute;
+                                width: 0;
+                                border: 25px solid transparent;
+                                border-left-color: white;
+                                left: 0;
+                                top: 0;
+                        }
+                        &::after {
+                                content: ' ';
+                                height: 0;
+                                position: absolute;
+                                width: 0;
+                                border: 25px solid transparent;
+                                border-left-color: $green;
+                                left: 100%;
+                                top: 0;
+                        }
                 }
-            }
-        }
+                }
+          }
     }
     .red {
         color : red;
