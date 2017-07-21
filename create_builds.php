@@ -7,9 +7,9 @@ if (isset($_GET['hash'])) {
   $random_list = $rc->decode($_GET['hash']);
   $url = $_GET['hash'];
 } else if( ( isset($_POST['champs']) ||  isset( $_POST['menber'] ) ) && isset( $_POST['map'] ) ) {
-    $number = $_POST['menber'] + 0;
-    $map = $_POST['map'];
-    $champs = $_POST['champs'];
+  $number = $_POST['menber'] + 0;
+  $map = $_POST['map'];
+  $champs = $_POST['champs'];
     if( ( count($champs) > 0 && count($champs) <= 10 ) || ( is_numeric( $number ) && ($number > 0 && $number <= 10 ) ) && ( $map == 'sf' || $map == 'ha'  ) ){
       $rc->create_random_builds($number,$map,$champs);
       $rc->createJsonData();

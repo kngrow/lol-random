@@ -45,7 +45,6 @@
       } else {
         $champs = $this->create_champ_data($select_champ);
       }
-      // var_dump($champs);;exit;
       $buld = [];
       foreach ($champs as $champ ) {
         $buld[$champ['name']]['build'] = $this->build($champ['id'], $map);
@@ -87,16 +86,26 @@
     {
       $small = $this->decodeUrl($hash);
       if($small){
-          return $this->decodeData($small);
+        return $this->decodeData($small);
       } else {
-          return false;
+        return false;
       }
     }
+    /**
+     * URLをデコードする
+     * @param  [type] $hash [description]
+     * @return [type]       [description]
+     */
     public function decodeUrl($hash)
     {
       $data = openssl_decrypt(($hash), 'AES-128-CBC', $this->key,0,$this->key);
       return gzuncompress($data);
     }
+    /**
+     * Hashをデコードしてデータにする
+     * @param  [type] $small [description]
+     * @return [type]        [description]
+     */
     public function decodeData($small){
       $small = json_decode($small,true);
       $i = 0;
@@ -113,11 +122,11 @@
         foreach ($item as $k) {
           $it = $ori_item['data'][$k];
           $arr[$k] = [
-                  'name' => $it['name'],
-                  'id' => $it[$item_id],
-                  'from' => $it['from'],
-                  'image' => $it['image'],
-                ];
+            'name' => $it['name'],
+            'id' => $it[$item_id],
+            'from' => $it['from'],
+            'image' => $it['image'],
+          ];
         }
         $list[$cm['name']]['build'] = $arr;
         $i++;
@@ -133,9 +142,9 @@
         $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
         if( ! is_array($d) ){
-            $tmp = [];
-            $tmp[] = $d;
-            $d = $tmp;
+          $tmp = [];
+          $tmp[] = $d;
+          $d = $tmp;
         }
         $champs = [];
         foreach ($d as $key => $value) {
@@ -149,6 +158,11 @@
         }
         return $champs;
     }
+    /**
+     * PostされたChampリストをデータにあてはめる
+     * @param  [type] $select_champ [description]
+     * @return [type]               [description]
+     */
     public function create_champ_data($select_champ){
         if( ! is_array($select_champ) ){
             $tmp = [];
@@ -178,62 +192,62 @@
     {
       if ($map == 'sf') {
         $map_id = 11;
-      }else {
+      } else {
         $map_id = 12;
       }
       $data = $this->ori_item;
       $boot_list = [];
       $item_list = [];
       foreach($data['data'] as $key => $value){
-          if ( !isset($value['inStore']) && !isset($value['hideFromAll']) ){
-              if ( !isset($value['into']) || ( $value['into'][0]) == 0  ){
-                  if($map_id === 11 ){
-                    if ( !$value['maps'][11]  ) {
-                      continue;
-                    }
-                  }
-                  if($map_id === 12 ){
-                    if ( !$value['maps'][12]  ) {
-                      continue;
-                    }
-                  }
-                  if (in_array('Trinket' , $value['tags'])) {
-                    continue;
-                  }
-                  if (in_array('Vision' , $value['tags'])) {
-                    continue;
-                  }
-                  if (strpos($value['name'],'エリクサー') !== false) {
-                    continue;
-                  }
-                  if (strpos($value['name'],'ドラン') !== false) {
-                    continue;
-                  }
-                  if (strpos($value['name'],'クイックチャージ') !== false) {
-                    continue;
-                  }
-                  if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){
-                    continue;
-                  }
-                  if(isset($value['stacks'])){
-                    continue;
-                  }
-                  // TODO: ハンターポーション
-                  // こラフトポーション
-                  // カル
-                  if ($key == 2032 || $key == 2033 ||  $key == 1083) {
-                    continue;
-                  }
-                  if ( isset($value['requiredChampion']) ) {
-                      continue;
-                  }
-                  if (in_array('Boots',$value['tags'])){
-                    $boot_list[] = $key;
-                  } else {
-                    $item_list[] = $key;
-                  }
+        if ( !isset($value['inStore']) && !isset($value['hideFromAll']) ){
+          if ( !isset($value['into']) || ( $value['into'][0]) == 0  ){
+            if( $map_id === 11 ){
+              if ( !$value['maps'][11] ) {
+                continue;
               }
+            }
+            if( $map_id === 12 ){
+              if ( !$value['maps'][12] ) {
+                continue;
+              }
+            }
+            if (in_array('Trinket' , $value['tags'])) {
+              continue;
+            }
+            if (in_array('Vision' , $value['tags'])) {
+              continue;
+            }
+            if (strpos($value['name'],'エリクサー') !== false) {
+              continue;
+            }
+            if (strpos($value['name'],'ドラン') !== false) {
+              continue;
+            }
+            if (strpos($value['name'],'クイックチャージ') !== false) {
+              continue;
+            }
+            if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){
+              continue;
+            }
+            if(isset($value['stacks'])){
+              continue;
+            }
+            // TODO: ハンターポーション
+            // こラフトポーション
+            // カル
+            if ($key == 2032 || $key == 2033 ||  $key == 1083) {
+              continue;
+            }
+            if ( isset($value['requiredChampion']) ) {
+                continue;
+            }
+            if (in_array('Boots',$value['tags'])){
+              $boot_list[] = $key;
+            } else {
+              $item_list[] = $key;
+            }
           }
+        }
       }
       if($champ === 'Victor'){
           $build = array_rand($item_list,4);
