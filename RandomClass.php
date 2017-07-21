@@ -39,8 +39,13 @@
     /**
      * メンバーとマップを選んでランダムにするやつ（大元
      */
-    public function create_random_builds($menber, $map){
-      $champs = $this->random_champ($menber);
+    public function create_random_builds($menber = null, $map, $select_champ = null){
+      if( $menber > 0 && is_null($select_champ)){
+        $champs = $this->random_champ($menber);
+      } else {
+        $champs = $this->create_champ_data($select_champ);
+      }
+      // var_dump($champs);;exit;
       $buld = [];
       foreach ($champs as $champ ) {
         $buld[$champ['name']]['build'] = $this->build($champ['id'], $map);
@@ -134,6 +139,25 @@
         }
         $champs = [];
         foreach ($d as $key => $value) {
+          $cm = $data['data'][$value];
+          $arr = [
+            'name' => $cm['name'],
+            'id' => $cm['id'],
+            'image' => $cm['image'],
+          ];
+          $champs[] = $arr;
+        }
+        return $champs;
+    }
+    public function create_champ_data($select_champ){
+        if( ! is_array($select_champ) ){
+            $tmp = [];
+            $tmp[] = $select_champ;
+            $select_champ = $tmp;
+        }
+        $champs = [];
+        $data = $this->ori_champ;
+        foreach ($select_champ as $key => $value) {
           $cm = $data['data'][$value];
           $arr = [
             'name' => $cm['name'],
