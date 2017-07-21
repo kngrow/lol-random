@@ -1,3 +1,7 @@
+<?php
+require './RandomClass.php';
+$rc = new RandomClass();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,13 +17,24 @@
             <span class="red">trollプレイでreportされても一切責任を負いません<span>
         </p>
         <form action="create_builds.php" method="POST">
-            <div class="form_parts">
+            <ul id="tab">
+              <li class="parent"><a href="#menber">menber</a></li>
+              <li ><a href="#champ">champ</a></li>
+            </ul>
+            <div class="form_parts" id="menber">
                 <h3><label for="member"> 人数 </label></h3>
                 <select name="menber" id="menber">
                     <?php for($i = 1 ; $i <= 10 ; $i++): ?>
                     <option><?= $i ?></option>
                     <?php endfor; ?>
                 </select>
+            </div>
+            <div class="form_parts" id="champ">
+              <?php foreach($rc->ori_champ['data'] as $key => $value): ?>
+                <label> <input type="checkbox" name="champs[]" class="champ" value="<?= $key ?>"> <?= $key ?> </label>
+              <?php endforeach;?>
+            <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
+   
             </div>
             <div class="form_parts">
                 <h3>map</h3>
@@ -33,4 +48,7 @@
         </form>
     </div>
  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/tab.js"></script>
+<script src="js/script.js"></script>
 </html>
