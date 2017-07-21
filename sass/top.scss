@@ -2,7 +2,7 @@ $green : #185421;
 body {
   .wrapper {
      margin: 0 auto ;
-     width : 80%;
+     width : 90%;
      form {
        border : 1px solid;
        .form_parts {
@@ -10,6 +10,22 @@ body {
            h3 {
                margin : 0;
            }
+           .champ_list {
+               text-align: left;
+               width: 90%;
+               margin: auto;
+
+             label {
+               width: 24%;
+               display: inline-block;
+             }
+         }
+     }
+       #tab {
+         list-style-type : none;
+         li {
+           display: inline-block;
+         }
        }
         .submit_wrapper{
             text-align : center;

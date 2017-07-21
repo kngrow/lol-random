@@ -6,10 +6,12 @@ $rc = new RandomClass();
 if (isset($_GET['hash'])) {
   $random_list = $rc->decode($_GET['hash']);
   $url = $_GET['hash'];
-} else if( isset( $_POST['menber'] ) && isset( $_POST['map'] ) ) {
+} else if( ( isset($_POST['champs']) ||  isset( $_POST['menber'] ) ) && isset( $_POST['map'] ) ) {
     $number = $_POST['menber'] + 0;
     $map = $_POST['map'];
-    if( is_numeric( $number ) && ($number > 0 && $number <= 10 ) && ( $map == 'sf' || $map == 'ha'  ) ){
+    $champs = $_POST['champs'];
+    if( ( count($champ) > 0 && count($champ) <= 10 ) || ( is_numeric( $number ) && ($number > 0 && $number <= 10 ) ) && ( $map == 'sf' || $map == 'ha'  ) ){
+
       $rc->create_random_builds($number,$map);
       $rc->createJsonData();
       $rc->createUrl();
