@@ -46,9 +46,9 @@
         $champs = $this->create_champ_data($select_champ);
       }
       $buld = [];
-      foreach ($champs as $champ ) {
-        $buld[$champ['name']]['build'] = $this->build($champ['id'], $map);
-        $buld[$champ['name']]['champ'] = $champ;
+      foreach ($champs as $key => $champ ) {
+        $buld[$key]['build'] = $this->build($champ['id'], $map);
+        $buld[$key]['champ'] = $champ;
       }
       $this->builds = $buld;
     }
@@ -138,7 +138,7 @@
      * @param  integer $menber [description]
      * @return [type]          [description]
      */
-    public function random_champ($menber = 5){
+    public function random_champ($menber = 5, $is_overlap = false){
         $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
         if( ! is_array($d) ){

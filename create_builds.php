@@ -16,6 +16,7 @@ if (isset($_GET['hash'])) {
       $rc->createUrl();
       $random_list = $rc->builds;
       $url = $rc->urlid;
+      // var_dump($random_list);exit;
     }
 }
 ?>
@@ -37,7 +38,7 @@ if (isset($_GET['hash'])) {
     <div class="builds">
       <div class="champ">
         <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/champion/<?= $champ['champ']['image']['full'] ?>" alt="">
-        <span class="champ-name"><?= $name ?></span>
+        <span class="champ-name"><?= $champ['champ']['name'] ?></span>
       </div>
       <div class="item-list">
         <?php foreach ($champ['build'] as $key => $value): ?>

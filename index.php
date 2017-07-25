@@ -40,11 +40,10 @@ $rc = new RandomClass();
                     </select>
                   </div>
                </div>
-                  <button type="button" class="add_menber">追加</button>
-              <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
+                  <button type="button" class="add_menber">人数追加</button>
+                  <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
               </div>
             </div>
-      
             <div class="form_parts">
                 <h3>map</h3>
                 <label><input type="radio" name="map" value="sf" checked="checked">summoners lift</label>
