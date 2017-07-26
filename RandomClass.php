@@ -249,16 +249,16 @@
           }
         }
       }
-      if($champ === 'Victor'){
+      if($champ === 'Viktor'){
           $build = array_rand($item_list,4);
           $tmp = $data['data'][3198];
           $arr = [
             'name' => $tmp['name'],
-            'id' => $item_list[$item_id],
+            'id' => 3198,
             'from' => $tmp['from'],
             'image' => $tmp['image'],
           ];
-          $item[$item_list[$item_id]] = $arr;
+          $item[3198] = $arr;
       } else if($champ === 'Cassiopeia'){
           $build = array_rand($item_list,6);
       } else {
