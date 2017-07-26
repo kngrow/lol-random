@@ -35,14 +35,17 @@ $rc = new RandomClass();
               </div>
               <div class="form_parts" id="champ">
                 <div class="champ_list">
-                  <div class="champ_select_wrapper">
-                    <select name="champs[]" id="champselector">
+                  <div class="left">
+                    <div class="champ_select_wrapper">
+                      <select name="champs[]" class="champselector">
                       <?php foreach($rc->ori_champ['data'] as $key => $value): ?>
-                         <option value="<?= $key ?>"><?= $value['name'] ?></option>
+                        <option value="<?= $key ?>"><?= $value['name'] ?></option>
                       <?php endforeach;?>
-                    </select>
+                      </select>
+                    </div>
                   </div>
-               </div>
+                  <div class="right"></div>
+                </div>
                <button type="button" class="add_menber">人数追加</button>
                <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
               </div>

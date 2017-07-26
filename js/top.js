@@ -21,20 +21,20 @@ $(function(){
     }
   });
 
-  $('#champselector').scombobox({
+  $('.champselector').scombobox({
     fullMatch:true});
 
   $('.add_menber').on('click',function(){
       // var select_champ = $('.champ_select_wrapper:last-child option:selected').val();
       $wrapper_count = $('.champ_select_wrapper').length
       if( $wrapper_count < 10  ){
-        var $champ_select_wrapper = $('.champ_select_wrapper:last-child').clone(true);
-        // $champ_select_wrapper.find('option[value='+ select_champ +']').remove();
-        //
-        if( $wrapper_count == 5  ){
-          $('.champ_list').append('<hr>');
+        var $champ_select_wrapper = $('.left .champ_select_wrapper:first-child').clone(true);
+        if($('.left .champ_select_wrapper').length > $('.right .champ_select_wrapper').length){
+          $champ_select_wrapper.appendTo('.champ_list .right');
+        } else {
+          $champ_select_wrapper.appendTo('.champ_list .left');
         }
-        $champ_select_wrapper.appendTo('.champ_list');
+        // $champ_select_wrapper.find('option[value='+ select_champ +']').remove();
       }
   });
 });
