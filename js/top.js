@@ -28,7 +28,7 @@ $(function(){
       // var select_champ = $('.champ_select_wrapper:last-child option:selected').val();
       $wrapper_count = $('.champ_select_wrapper').length
       if( $wrapper_count < 10  ){
-        var $champ_select_wrapper = $('.champ_select_wrapper:last-child').clone();
+        var $champ_select_wrapper = $('.champ_select_wrapper:last-child').clone(true);
         // $champ_select_wrapper.find('option[value='+ select_champ +']').remove();
         //
         if( $wrapper_count == 5  ){

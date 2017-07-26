@@ -16,7 +16,6 @@ if (isset($_GET['hash'])) {
       $rc->createUrl();
       $random_list = $rc->builds;
       $url = $rc->urlid;
-      // var_dump($random_list);exit;
     }
 }
 ?>

@@ -30,11 +30,24 @@
      * APIからデータを取ってきて置いとく
      */
     public function get_data(){
-      $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
-      $this->ori_item = json_decode($data,true);
-      $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
-      $data = file_get_contents($url);
-      $this->ori_champ = json_decode($data,true);
+      $version = json_decode(@file_get_contents('./data/version.json'));
+      if($version[0] !== $this->version ){
+        // echo "new";
+        $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
+        file_put_contents('./data/item.json',$data);
+        $this->ori_item = json_decode($data,true);
+
+        $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
+        $data = file_get_contents($url);
+        file_put_contents('./data/champ.json',$data);
+        $this->ori_champ = json_decode($data,true);
+
+        file_put_contents('./data/version.json',json_encode([$this->version, $this->region]));
+      } else {
+        // echo "read";
+        $this->ori_item = json_decode(file_get_contents('./data/item.json'),true);
+        $this->ori_champ = json_decode(file_get_contents('./data/champ.json'),true);
+      }
     }
     /**
      * メンバーとマップを選んでランダムにするやつ（大元

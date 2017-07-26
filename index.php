@@ -20,8 +20,8 @@ $rc = new RandomClass();
         <form action="create_builds.php" method="POST">
              <div id="tab">
               <ul>
-                <li ><a href="#menber">人数選択(championとitemがランダム)</a></li>
-                <li ><a href="#champ">champion選択(itemがランダム)</a></li>
+                <li><a href="#menber">人数選択(championとitemがランダム)</a></li>
+                <li><a href="#champ">champion選択(itemがランダム)</a></li>
               </ul>
               <div class="form_parts" id="menber">
                 <h3><label for="member"> 人数 </label></h3>
