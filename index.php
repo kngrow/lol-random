@@ -15,7 +15,7 @@ $rc = new RandomClass();
         <h1> ランダムアイテムセレクター</h1>
         <p>
            あなたのチャンピオンとビルドを勝手に決めます。<br>
-            <span class="red">trollプレイでreportされても一切責任を負いません<span>
+           <span class="red">trollプレイでreportされても一切責任を負いません<span>
         </p>
         <form action="create_builds.php" method="POST">
              <div id="tab">
@@ -24,12 +24,14 @@ $rc = new RandomClass();
                 <li ><a href="#champ">champion選択(itemがランダム)</a></li>
               </ul>
               <div class="form_parts" id="menber">
-                  <h3><label for="member"> 人数 </label></h3>
-                  <select name="menber" id="menber">
-                      <?php for($i = 1 ; $i <= 10 ; $i++): ?>
-                      <option><?= $i ?></option>
-                      <?php endfor; ?>
-                  </select>
+                <h3><label for="member"> 人数 </label></h3>
+                <select name="menber" id="menber">
+                  <option value="2">1 vs 1</option>
+                  <option value="4">2 vs 2</option>
+                  <option value="6">3 vs 3</option>
+                  <option value="8">4 vs 4</option>
+                  <option value="10" selected>5 vs 5</option>
+                </select>
               </div>
               <div class="form_parts" id="champ">
                 <div class="champ_list">
@@ -41,18 +43,17 @@ $rc = new RandomClass();
                     </select>
                   </div>
                </div>
-                  <button type="button" class="add_menber">人数追加</button>
-                  <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
+               <button type="button" class="add_menber">人数追加</button>
+               <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
               </div>
             </div>
             <div class="form_parts">
-                <h3>map</h3>
-                <label><input type="radio" name="map" value="sf" checked="checked">summoners lift</label>
-                <label><input type="radio" name="map" value="ha" >howling abyss</label>
-
+              <h3>map</h3>
+              <label><input type="radio" name="map" value="sf" checked="checked">summoners lift</label>
+              <!-- <label><input type="radio" name="map" value="ha" >howling abyss</label> -->
             </div>
             <div class="submit_wrapper">
-                <button type ="submit">build!</button>
+              <button type ="submit">build!</button>
             </div>
         </form>
     </div>
