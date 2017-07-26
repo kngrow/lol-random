@@ -7,6 +7,7 @@ $rc = new RandomClass();
   <head>
     <meta charset="utf-8">
     <title>らんだむ</title>
+    <link rel="stylesheet" href="/css/jquery.scombobox.min.css">
     <link rel="stylesheet" href="/css/top.css">
   </head>
   <body>
@@ -58,5 +59,6 @@ $rc = new RandomClass();
  </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tabslet.js/1.7.3/jquery.tabslet.min.js"></script>
+<script src="js/jquery.scombobox.min.js"></script>
 <script src="js/top.js"></script>
 </html>

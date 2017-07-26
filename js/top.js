@@ -20,6 +20,10 @@ $(function(){
        $('.champ_select_warning').hide();
     }
   });
+
+  $('#champselector').scombobox({
+    fullMatch:true});
+
   $('.add_menber').on('click',function(){
       // var select_champ = $('.champ_select_wrapper:last-child option:selected').val();
       $wrapper_count = $('.champ_select_wrapper').length
