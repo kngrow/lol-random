@@ -10,7 +10,6 @@ if (isset($_GET['hash'])) {
   $number = isset($_POST['menber']) ? $_POST['menber'] + 0 : null;
   $map = $_POST['map'];
   $champs = isset($_POST['champs']) ? $_POST['champs'] : null;
-  var_dump($champs);exit;
     if( ( count($champs) > 0 && count($champs) <= 10 ) || ( is_numeric( $number ) && ($number > 0 && $number <= 10 ) ) && ( $map == 'sf' || $map == 'ha'  ) ){
       $rc->create_random_builds($number,$map,$champs);
       $rc->createJsonData();
@@ -30,7 +29,7 @@ if (isset($_GET['hash'])) {
 </head>
 <body>
 <div class="build-wrapper">
-  <textarea id="url" rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?></textarea>
+  <textarea id="url" rows="8" cols="80" readonly="readonly">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?></textarea>
   <button class="btn" data-clipboard-target="#url" data-copied-hint="Copied!" > copy!</button>
 
   <?php if($random_list): ?>
