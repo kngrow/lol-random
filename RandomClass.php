@@ -30,11 +30,24 @@
      * APIからデータを取ってきて置いとく
      */
     public function get_data(){
-      $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
-      $this->ori_item = json_decode($data,true);
-      $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
-      $data = file_get_contents($url);
-      $this->ori_champ = json_decode($data,true);
+      $version = json_decode(@file_get_contents('./data/version.json'));
+      if($version[0] !== $this->version ){
+        // echo "new";
+        $data = file_get_contents("http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/item.json");
+        file_put_contents('./data/item.json',$data);
+        $this->ori_item = json_decode($data,true);
+
+        $url = "http://ddragon.leagueoflegends.com/cdn/{$this->version}/data/{$this->region}/champion.json";
+        $data = file_get_contents($url);
+        file_put_contents('./data/champ.json',$data);
+        $this->ori_champ = json_decode($data,true);
+
+        file_put_contents('./data/version.json',json_encode([$this->version, $this->region]));
+      } else {
+        // echo "read";
+        $this->ori_item = json_decode(file_get_contents('./data/item.json'),true);
+        $this->ori_champ = json_decode(file_get_contents('./data/champ.json'),true);
+      }
     }
     /**
      * メンバーとマップを選んでランダムにするやつ（大元
@@ -46,9 +59,9 @@
         $champs = $this->create_champ_data($select_champ);
       }
       $buld = [];
-      foreach ($champs as $champ ) {
-        $buld[$champ['name']]['build'] = $this->build($champ['id'], $map);
-        $buld[$champ['name']]['champ'] = $champ;
+      foreach ($champs as $key => $champ ) {
+        $buld[$key]['build'] = $this->build($champ['id'], $map);
+        $buld[$key]['champ'] = $champ;
       }
       $this->builds = $buld;
     }
@@ -138,7 +151,7 @@
      * @param  integer $menber [description]
      * @return [type]          [description]
      */
-    public function random_champ($menber = 5){
+    public function random_champ($menber = 5, $is_overlap = false){
         $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
         if( ! is_array($d) ){
@@ -249,16 +262,16 @@
           }
         }
       }
-      if($champ === 'Victor'){
+      if($champ === 'Viktor'){
           $build = array_rand($item_list,4);
           $tmp = $data['data'][3198];
           $arr = [
             'name' => $tmp['name'],
-            'id' => $item_list[$item_id],
+            'id' => 3198,
             'from' => $tmp['from'],
             'image' => $tmp['image'],
           ];
-          $item[$item_list[$item_id]] = $arr;
+          $item[3198] = $arr;
       } else if($champ === 'Cassiopeia'){
           $build = array_rand($item_list,6);
       } else {

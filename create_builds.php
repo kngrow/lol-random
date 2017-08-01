@@ -7,9 +7,9 @@ if (isset($_GET['hash'])) {
   $random_list = $rc->decode($_GET['hash']);
   $url = $_GET['hash'];
 } else if( ( isset($_POST['champs']) ||  isset( $_POST['menber'] ) ) && isset( $_POST['map'] ) ) {
-  $number = $_POST['menber'] + 0;
+  $number = isset($_POST['menber']) ? $_POST['menber'] + 0 : null;
   $map = $_POST['map'];
-  $champs = $_POST['champs'];
+  $champs = isset($_POST['champs']) ? $_POST['champs'] : null;
     if( ( count($champs) > 0 && count($champs) <= 10 ) || ( is_numeric( $number ) && ($number > 0 && $number <= 10 ) ) && ( $map == 'sf' || $map == 'ha'  ) ){
       $rc->create_random_builds($number,$map,$champs);
       $rc->createJsonData();
@@ -29,7 +29,7 @@ if (isset($_GET['hash'])) {
 </head>
 <body>
 <div class="build-wrapper">
-  <textarea id="url" rows="8" cols="80">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?></textarea>
+  <textarea id="url" rows="8" cols="80" readonly="readonly">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?></textarea>
   <button class="btn" data-clipboard-target="#url" data-copied-hint="Copied!" > copy!</button>
 
   <?php if($random_list): ?>
@@ -37,7 +37,7 @@ if (isset($_GET['hash'])) {
     <div class="builds">
       <div class="champ">
         <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/champion/<?= $champ['champ']['image']['full'] ?>" alt="">
-        <span class="champ-name"><?= $name ?></span>
+        <span class="champ-name"><?= $champ['champ']['name'] ?></span>
       </div>
       <div class="item-list">
         <?php foreach ($champ['build'] as $key => $value): ?>
