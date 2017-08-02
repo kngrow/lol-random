@@ -16,6 +16,7 @@ if (isset($_GET['hash'])) {
       $rc->createUrl();
       $random_list = $rc->builds;
       $url = $rc->urlid;
+      $half = ( count($random_list) / 2 ) - 1;
     }
 }
 ?>
@@ -34,8 +35,8 @@ if (isset($_GET['hash'])) {
   <a href="/"> もどる</a>
 
   <?php if($random_list): ?>
-  <?php foreach ($random_list as $name => $champ): ?>
-    <div class="builds">
+  <?php foreach ($random_list as $menber => $champ): ?>
+  <div class="builds <?= $menber > $half ? 'red_team' : '' ?>">
       <div class="champ">
         <img src="http://ddragon.leagueoflegends.com/cdn/<?= $rc->version ?>/img/champion/<?= $champ['champ']['image']['full'] ?>" alt="">
         <span class="champ-name"><?= $champ['champ']['name'] ?></span>
@@ -58,6 +59,9 @@ if (isset($_GET['hash'])) {
         <?php endforeach; ?>
       </div>
     </div>
+    <?php if($half === $menber): ?>
+    <hr>
+    <?php endif; ?>
   <?php endforeach; ?>
   <?php else: ?>
   <p>存在しないデータっす</p>
