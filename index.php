@@ -34,6 +34,7 @@ $rc = new RandomClass();
              </select>
            </div>
            <div class="form_parts" id="champ">
+           <button type="button" class="add_menber">人数追加</button>
               <div class="champ_list">
                 <div class="left">
                   <div class="champ_select_wrapper">
@@ -56,7 +57,6 @@ $rc = new RandomClass();
                 </div>
              </div>
            </div>
-           <button type="button" class="add_menber">人数追加</button>
            <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
          </div>
        </div>
