@@ -1,14 +1,14 @@
 $(function(){
   $('#tab').tabslet();
   $('#champ').find('select').prop('disabled',true);
-  $('#tab').on("_before" ,function(){
-      var active = $("#tab .active a").text();
-      if (active == 'champ'){
-        $('#champ').find('select').prop('disabled',true);
-        $('select#menber').prop('disabled',false);
-      } else {
-        $('#champ').find('select').prop('disabled',false);
+  $('#tab').on("_before" ,function(e){
+      var active = $(e.target).find('a').attr('href');
+      if (active == '#champ'){
+        $('.champselector').prop('disabled',false);
         $('select#menber').prop('disabled',true);
+      } else {
+        $('.champselector').prop('disabled',true);
+        $('select#menber').prop('disabled',false);
       }
   });
   $('input.champ').on('click', function(){

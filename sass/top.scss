@@ -25,12 +25,21 @@ body {
               width: 24%;
               display: inline-block;
             }
+            .select2-selection{
+              margin-bottom: 10px;
+            }
          }
       }
       #tab {
         list-style-type : none;
         li {
           display: inline-block;
+          margin-right : 50px;
+          a {
+            text-decoration: none;
+            color : $green / 0.6 ;
+            font-weight : bold;
+          }
         }
       }
       .submit_wrapper{
