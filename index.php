@@ -37,7 +37,7 @@ $rc = new RandomClass();
                 <div class="champ_list">
                   <div class="left">
                     <div class="champ_select_wrapper">
-                      <select name="champs[]" class="champselector">
+                      <select name="champs[]" class="champselector" tabindex='1'>
                         <option value=""></option>
                       <?php foreach($rc->ori_champ['data'] as $key => $value): ?>
                         <option value="<?= $key ?>"><?= $value['name'] ?></option>
@@ -45,7 +45,16 @@ $rc = new RandomClass();
                       </select>
                     </div>
                   </div>
-                  <div class="right"></div>
+                  <div class="right">
+                  <div class="champ_select_wrapper">
+                      <select name="champs[]" class="champselector" tabindex='1'>
+                        <option value=""></option>
+                      <?php foreach($rc->ori_champ['data'] as $key => $value): ?>
+                        <option value="<?= $key ?>"><?= $value['name'] ?></option>
+                      <?php endforeach;?>
+                      </select>
+                    </div>
+                  </div>
                 </div>
                <button type="button" class="add_menber">人数追加</button>
                <p class="champ_select_warning hide">１０チャンプ以上は選べないンゴ</p>
