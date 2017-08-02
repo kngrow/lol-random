@@ -23,6 +23,7 @@ $(function(){
 
       $(".champselector").select2({
        placeholder: "選択してくれ　　　　",
+       width: '80%',
       });
 
   $('.add_menber').on('click',function(){
@@ -36,6 +37,7 @@ $(function(){
         $('.champ_list .right').append($champ_select_right_wrapper);
         $(".champselector").select2({
           placeholder: "選択してくれ　　　　",
+          width: '80%',
         });
         // $champ_select_wrapper.find('option[value='+ select_champ +']').remove();
       }
