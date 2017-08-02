@@ -6,6 +6,7 @@ $rc = new RandomClass();
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="theme-color" content="#1b3042">
     <title>らんだむ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
     <link rel="stylesheet" href="/css/top.css">
@@ -34,6 +35,7 @@ $rc = new RandomClass();
              </select>
            </div>
            <div class="form_parts" id="champ">
+           <h3> 選択champion追加 </h3>
            <button type="button" class="add_menber">人数追加</button>
               <div class="champ_list">
                 <div class="left">

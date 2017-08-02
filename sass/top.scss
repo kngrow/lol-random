@@ -1,5 +1,12 @@
 $green : #288c37;
+$button : #249978;
+$bgcolor: rgb(27, 48, 66) ;
+$highlight:#3182a4;
 body {
+  background-color: $bgcolor;
+  color : white;
+  font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+  font-size : 16px;
   .wrapper {
     margin: 0 auto ;
     width : 90%;
@@ -36,6 +43,16 @@ body {
             }
         }
       }
+      .add_menber {
+        background-color: $button;
+        color : white;
+        margin-bottom : 30px;
+        border : 0;
+        padding: 5px 10px;
+        border-radius : 5px;
+        font-weight : bold;
+        cursor :pointer;
+      }
       #tab {
         list-style-type : none;
         li {
@@ -53,11 +70,13 @@ body {
          button {
            display: inline-block;
            padding: 0 0 0 10px;
+           margin : 15px;
            height: 50px;
            width: 200px;
            position: relative;
            font-size: 20px;
            background: $green;
+           color : white;
            border: 0;
            cursor: pointer;
            &::before{
@@ -66,7 +85,7 @@ body {
               position: absolute;
               width: 0;
               border: 25px solid transparent;
-              border-left-color: white;
+              border-left-color: $bgcolor;
               left: 0;
               top: 0;
            }
@@ -89,5 +108,11 @@ body {
     }
     .hide {
       display: none;
+    }
+    .select2-results{
+      color :black;
+    }
+    .select2-results .select2-results__option.select2-results__option--highlighted {
+      background : $highlight !important;
     }
 }
