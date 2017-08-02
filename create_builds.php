@@ -31,6 +31,7 @@ if (isset($_GET['hash'])) {
 <div class="build-wrapper">
   <textarea id="url" rows="8" cols="80" readonly="readonly">http://lol-random.kngrow.me/create_builds.php?hash=<?= urlencode($url)  ?></textarea>
   <button class="btn" data-clipboard-target="#url" data-copied-hint="Copied!" > copy!</button>
+  <a href="/"> もどる</a>
 
   <?php if($random_list): ?>
   <?php foreach ($random_list as $name => $champ): ?>

@@ -214,29 +214,41 @@
       foreach($data['data'] as $key => $value){
         if ( !isset($value['inStore']) && !isset($value['hideFromAll']) ){
           if ( !isset($value['into']) || ( $value['into'][0]) == 0  ){
+            // サモナーズリフト
             if( $map_id === 11 ){
               if ( !$value['maps'][11] ) {
                 continue;
               }
             }
+            // ハウリングアビス
             if( $map_id === 12 ){
               if ( !$value['maps'][12] ) {
                 continue;
               }
+              if ( in_array('GoldPer', $value['tags']) ){
+                continue;
+              }
+              // GA,メジャイ
+              if ( in_array($key , ['3026', '3041', '3056' ]) ){
+                continue;
+              }
             }
-            if (in_array('Trinket' , $value['tags'])) {
+            if (in_array('Trinket', $value['tags'])) {
               continue;
             }
-            if (in_array('Vision' , $value['tags'])) {
+            if (in_array('Vision', $value['tags'])) {
               continue;
             }
-            if (strpos($value['name'],'エリクサー') !== false) {
+            if (strpos($value['name'], 'エリクサー') !== false) {
               continue;
             }
-            if (strpos($value['name'],'ドラン') !== false) {
+            if (strpos($value['name'], 'ガーディアン') !== false) {
               continue;
             }
-            if (strpos($value['name'],'クイックチャージ') !== false) {
+            if (strpos($value['name'], 'ドラン') !== false) {
+              continue;
+            }
+            if (strpos($value['name'], 'クイックチャージ') !== false) {
               continue;
             }
             if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){

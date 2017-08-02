@@ -54,7 +54,7 @@ $rc = new RandomClass();
             <div class="form_parts">
               <h3>map</h3>
               <label><input type="radio" name="map" value="sf" checked="checked">summoners lift</label>
-              <!-- <label><input type="radio" name="map" value="ha" >howling abyss</label> -->
+              <label><input type="radio" name="map" value="ha" >howling abyss</label>
             </div>
             <div class="submit_wrapper">
               <button type ="submit">build!</button>
