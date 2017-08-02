@@ -11,7 +11,7 @@ if (isset($_GET['hash'])) {
   $map = $_POST['map'];
   $champs = isset($_POST['champs']) ? $_POST['champs'] : null;
     if( ( count($champs) > 0 && count($champs) <= 10 ) || ( is_numeric( $number ) && ($number > 0 && $number <= 10 ) ) && ( $map == 'sf' || $map == 'ha'  ) ){
-      $rc->create_random_builds($number,$map,$champs);
+      $rc->createRandomBuilds($number,$map,$champs);
       $rc->createJsonData();
       $rc->createUrl();
       $random_list = $rc->builds;

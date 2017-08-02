@@ -12,14 +12,14 @@
     private $key = "qawsedrftgyhujikolp";
 
     function __construct(){
-        $this->get_version();
-        $this->get_data();
+        $this->getVersion();
+        $this->getData();
     }
     /**
      * バージョンとかサーバーとか取ってくるやつ
      * @return [type] [description]
      */
-    public function get_version (){
+    public function getVersion (){
         $url = "https://ddragon.leagueoflegends.com/realms/jp.json";
         $data = file_get_contents($url);
         $versions = json_decode($data , true);
@@ -29,7 +29,7 @@
     /**
      * APIからデータを取ってきて置いとく
      */
-    public function get_data(){
+    public function getData(){
       $version = json_decode(@file_get_contents('./data/version.json'));
       if($version[0] !== $this->version ){
         // echo "new";
@@ -52,11 +52,11 @@
     /**
      * メンバーとマップを選んでランダムにするやつ（大元
      */
-    public function create_random_builds($menber = null, $map, $select_champ = null){
+    public function createRandomBuilds($menber = null, $map, $select_champ = null){
       if( $menber > 0 && is_null($select_champ)){
-        $champs = $this->random_champ($menber);
+        $champs = $this->randomChamp($menber);
       } else {
-        $champs = $this->create_champ_data($select_champ);
+        $champs = $this->createChampData($select_champ);
       }
       $buld = [];
       foreach ($champs as $key => $champ ) {
@@ -151,7 +151,7 @@
      * @param  integer $menber [description]
      * @return [type]          [description]
      */
-    public function random_champ($menber = 5, $is_overlap = false){
+    public function randomChamp($menber = 5, $is_overlap = false){
         $data = $this->ori_champ;
         $d = array_rand($data['data'],$menber);
         if( ! is_array($d) ){
@@ -176,7 +176,7 @@
      * @param  [type] $select_champ [description]
      * @return [type]               [description]
      */
-    public function create_champ_data($select_champ){
+    public function createChampData($select_champ){
         if( ! is_array($select_champ) ){
             $tmp = [];
             $tmp[] = $select_champ;
@@ -228,7 +228,7 @@
               if ( in_array('GoldPer', $value['tags']) ){
                 continue;
               }
-              // GA,メジャイ
+              // GA,メジャイ,オームレッカー
               if ( in_array($key , ['3026', '3041', '3056' ]) ){
                 continue;
               }
