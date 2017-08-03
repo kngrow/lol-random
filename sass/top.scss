@@ -3,6 +3,7 @@ $button : #249978;
 $bgcolor: rgb(27, 48, 66) ;
 $highlight:#3182a4;
 body {
+  margin : 0;
   background-color: $bgcolor;
   color : white;
   font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
@@ -15,6 +16,9 @@ body {
       .form_parts {
          text-align : center;
          margin : 15px;
+         p.howto {
+           text-align: left;
+         }
          h3 {
            margin : 0;
          }
@@ -55,13 +59,20 @@ body {
       }
       #tab {
         list-style-type : none;
-        li {
-          display: inline-block;
-          margin-right : 50px;
-          a {
-            text-decoration: none;
-            color : $green ;
-            font-weight : bold;
+        ul {
+          margin : 5px auto;
+          width :95%;
+          li {
+            display: inline-block;
+            border : 1px solid $button;
+            border-radius :5px;
+            padding :5px 10px;
+            width:49%;
+            a {
+              text-decoration: none;
+              color : $green ;
+              font-weight : bold;
+            }
           }
         }
       }
@@ -103,8 +114,19 @@ body {
        }
      }
    }
+   footer {
+     position: fixed;
+     bottom: 0;
+     background-color: $bgcolor * 2;
+     width: 100%;
+     padding:3px;
+     text-align:center;
+   }
    .red {
       color : red;
+    }
+    .bold {
+      font-weight : bold;
     }
     .hide {
       display: none;

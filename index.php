@@ -7,24 +7,27 @@ $rc = new RandomClass();
   <head>
     <meta charset="utf-8">
     <meta name="theme-color" content="#1b3042">
+    <meta name="viewport" content="width=device-width" />
     <title>らんだむ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
     <link rel="stylesheet" href="/css/top.css">
   </head>
   <body>
     <div class="wrapper">
-      <h1> ランダムアイテムセレクター</h1>
+      <h1> f**k build generator</h1>
       <p>
-        あなたのチャンピオンとビルドを勝手に決めます。<br>
-        <span class="red">trollプレイでreportされても一切責任を負いません<span>
+        チャンピオンとビルドを勝手に決めます。<br>
+        NormalやARAMに飽きた時、決められたチャンピオンとアイテムで紅白戦を行うと新鮮です<br>
+        <span class="red bold">trollプレイでreportされても一切責任を負いません<span>
       </p>
       <form action="create_builds.php" method="POST">
          <div id="tab">
            <ul>
-             <li><a href="#menber">人数選択(championとitemがランダム)</a></li>
-             <li><a href="#champ">champion選択(itemがランダム)</a></li>
+             <li><a href="#menber">チャンプ/アイテム ランダム</a></li>
+             <li><a href="#champ">アイテムランダム</a></li>
            </ul>
            <div class="form_parts" id="menber">
+              <p class="howto">チャンピオンを選択できるゲームモードはこちら！<br>表示されたチャンピオンをピックしてください</p>
              <h3><label for="member"> 人数 </label></h3>
              <select name="menber" id="menber">
                <option value="2">1 vs 1</option>
@@ -35,6 +38,7 @@ $rc = new RandomClass();
              </select>
            </div>
            <div class="form_parts" id="champ">
+           <p class="howto">チャンピオンが勝手に選ばれるゲームモードはこちら!<br>ゲーム開始時に表示されたチャンピオンを選択してください</p>
            <h3> 選択champion追加 </h3>
            <button type="button" class="add_menber">人数追加</button>
               <div class="champ_list">
@@ -72,6 +76,9 @@ $rc = new RandomClass();
        </div>
      </form>
     </div>
+  <footer>
+    <span>Copyright (c) 2017 Copyright pinon All Rights Reserved.</span>
+</footer>
  </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tabslet.js/1.7.3/jquery.tabslet.min.js"></script>
