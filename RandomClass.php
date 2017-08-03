@@ -195,7 +195,7 @@
         }
         return $champs;
     }
-    /**
+   /**
      * ビルド奴
      * @param  [type] $champ [description]
      * @param  string $map   [description]
@@ -239,16 +239,7 @@
             if (in_array('Vision', $value['tags'])) {
               continue;
             }
-            if (strpos($value['name'], 'エリクサー') !== false) {
-              continue;
-            }
-            if (strpos($value['name'], 'ガーディアン') !== false) {
-              continue;
-            }
-            if (strpos($value['name'], 'ドラン') !== false) {
-              continue;
-            }
-            if (strpos($value['name'], 'クイックチャージ') !== false) {
+            if (strpos($value['name'], 'エリクサー') !== false || strpos($value['name'], 'ドラン') !== false || strpos($value['name'], 'クイックチャージ') !== false) {
               continue;
             }
             if($value['gold']['base'] == 0 && $value['gold']['total'] == 0 && $value['gold']['sell'] == 0){
@@ -257,16 +248,14 @@
             if(isset($value['stacks'])){
               continue;
             }
-            // TODO: ハンターポーション
-            // こラフトポーション
-            // カル
-            if ($key == 2032 || $key == 2033 ||  $key == 1083) {
+            // ハンターポーション, こラフトポーション, カル
+            if( in_array($key , [2032, 2033, 1083]) ){
               continue;
             }
             if ( isset($value['requiredChampion']) ) {
                 continue;
             }
-            if (in_array('Boots',$value['tags'])){
+            if (in_array('Boots', $value['tags'])){
               $boot_list[] = $key;
             } else {
               $item_list[] = $key;
@@ -275,19 +264,19 @@
         }
       }
       if($champ === 'Viktor'){
-          $build = array_rand($item_list,4);
-          $tmp = $data['data'][3198];
-          $arr = [
-            'name' => $tmp['name'],
-            'id' => 3198,
-            'from' => $tmp['from'],
-            'image' => $tmp['image'],
-          ];
-          $item[3198] = $arr;
+        $build = array_rand($item_list, 4);
+        $tmp = $data['data'][3198];
+        $arr = [
+          'name' => $tmp['name'],
+          'id' => 3198,
+          'from' => $tmp['from'],
+          'image' => $tmp['image'],
+        ];
+        $item[3198] = $arr;
       } else if($champ === 'Cassiopeia'){
-          $build = array_rand($item_list,6);
+        $build = array_rand($item_list,6);
       } else {
-          $build = array_rand($item_list,5);
+        $build = array_rand($item_list,5);
       }
       if($champ !== 'Cassiopeia'){
           $build['boots'] = array_rand($boot_list);
@@ -303,6 +292,10 @@
           ];
           $item[$boot_list[$item_id]] = $arr;
         } else {
+          // meleeチャンプはhurrycaneを詰めないので再抽選？
+          if( $this->is_melee($champ) && $item_list[$item_id] == 3085 ){
+            $item_id = $this->withoutHurrycaneRottely($item_list);
+          }
           $tmp = $data['data'][$item_list[$item_id]];
           $arr = [
             'name' => $tmp['name'],
@@ -315,4 +308,26 @@
       }
      return $item;
     }
+    public function lottey(){
+
+    }
+  /**
+   * rangedかmeleeか判定（多分
+   * @param string $champ_id
+   * @return boolean  melee ならtrue
+   */
+  public function is_melee($champ_id){
+    $champ_data = $this->ori_champ['data'][$champ_id];
+    return $champ_data['stats']['attackrange'] <= 175 ? true : false;
   }
+  /** 
+   * ハリケーンなしで１個返す
+   * @param array $item_list 
+   * @return int アイテムの配列の順番
+   */
+  public function withoutHurrycaneRottely($item_list){
+    $hurricane_key = array_search(3085, $item_list);
+    unset($item_list[$hurricane_key]);
+    return array_rand($item_list);
+  }
+}
