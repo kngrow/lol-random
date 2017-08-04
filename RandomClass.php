@@ -1,7 +1,7 @@
 <?php
-  /**
-   * らんだむ
-   */
+/**
+ * らんだむ
+ */
 class RandomClass
 {
   public $champ = null;
@@ -252,7 +252,7 @@ class RandomClass
             continue;
           }
           if ( isset($value['requiredChampion']) ) {
-              continue;
+            continue;
           }
           if (in_array('Boots', $value['tags'])){
             $boot_list[] = $key;
@@ -278,7 +278,7 @@ class RandomClass
       $build = array_rand($item_list,5);
     }
     if($champ !== 'Cassiopeia'){
-        $build['boots'] = array_rand($boot_list);
+      $build['boots'] = array_rand($boot_list);
     }
     foreach($build as $k => $item_id){
       if ($k === "boots") {
@@ -294,6 +294,10 @@ class RandomClass
         // meleeチャンプはhurrycaneを積めないので再抽選？
         if( $this->is_melee($champ) && $item_list[$item_id] == 3085 ){
           $item_id = $this->withoutHurrycaneRottely($item_list);
+        }
+        // rangeチャンプはhydra系を積めない
+        if( !$this->is_melee($champ) && ( $item_list[$item_id] == 3074 || $item_list[$item_id] == 3748 ) ){
+          $item_id = $this->withouthydraRottely($item_list);
         }
         $tmp = $data['data'][$item_list[$item_id]];
         $arr = [
@@ -319,11 +323,24 @@ class RandomClass
   /** 
    * ハリケーンなしで１個返す
    * @param array $item_list 
-   * @return int アイテムの配列の順番
+   * @return array アイテムの配列の順番
    */
   public function withoutHurrycaneRottely($item_list){
     $hurricane_key = array_search(3085, $item_list);
     unset($item_list[$hurricane_key]);
+    return array_rand($item_list);
+  }
+  /**
+   * ハイドラをなしで１個かえす
+   * @param $item_list
+   * @return array アイテム配列
+   */
+  public function withoutHydraRottely($item_list){
+    // $hyder_id = ['3074','3748']
+    $hydra_key = array_search(3074, $item_list);
+    unset($item_list[$hydra_key]);
+    $hydra_key = array_search(3748, $item_list);
+    unset($item_list[$hydra_key]);
     return array_rand($item_list);
   }
 }

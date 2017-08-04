@@ -14,12 +14,14 @@ $rc = new RandomClass();
   </head>
   <body>
     <div class="wrapper">
-      <h1> f**k build generator</h1>
-      <p>
-        チャンピオンとビルドを勝手に決めます。<br>
-        NormalやARAMに飽きた時、決められたチャンピオンとアイテムで紅白戦を行うと新鮮です<br>
-        <span class="red bold">trollプレイでreportされても一切責任を負いません<span>
-      </p>
+      <div class="text">
+        <h1> f**k build generator</h1>
+        <p>
+          チャンピオンとビルドを勝手に決めます。<br>
+          NormalやARAMに飽きた時、決められたチャンピオンとアイテムで紅白戦を行うと新鮮です<br>
+          <span class="red bold">trollプレイでreportされても一切責任を負いません<span>
+        </p>
+      </div>
       <form action="create_builds.php" method="POST">
          <div id="tab">
            <ul>
