@@ -1,14 +1,14 @@
 $(function(){
   $('#tab').tabslet();
   $('#champ').find('select').prop('disabled',true);
-  $('#tab').on("_before" ,function(){
-      var active = $("#tab .active a").text();
-      if (active == 'champ'){
-        $('#champ').find('select').prop('disabled',true);
-        $('select#menber').prop('disabled',false);
-      } else {
-        $('#champ').find('select').prop('disabled',false);
+  $('#tab').on("_before" ,function(e){
+      var active = $(e.target).find('a').attr('href');
+      if (active == '#champ'){
+        $('.champselector').prop('disabled',false);
         $('select#menber').prop('disabled',true);
+      } else {
+        $('.champselector').prop('disabled',true);
+        $('select#menber').prop('disabled',false);
       }
   });
   $('input.champ').on('click', function(){
@@ -23,6 +23,7 @@ $(function(){
 
       $(".champselector").select2({
        placeholder: "選択してくれ　　　　",
+       width: '80%',
       });
 
   $('.add_menber').on('click',function(){
@@ -31,14 +32,13 @@ $(function(){
       if( $wrapper_count < 10  ){
         $('.left .champ_select_wrapper:first-child .champselector').select2('destroy');
         var $champ_select_wrapper = $('.left .champ_select_wrapper:first-child').clone(true);
-        if($('.left .champ_select_wrapper').length > $('.right .champ_select_wrapper').length){
-          $champ_select_wrapper.appendTo('.champ_list .right');
-        } else {
-          $champ_select_wrapper.appendTo('.champ_list .left');
-        }
-         $(".champselector").select2({
-           placeholder: "選択してくれ　　　　",
-         });
+        var $champ_select_right_wrapper = $('.left .champ_select_wrapper:first-child').clone(true);
+        $('.champ_list .left').append($champ_select_wrapper);
+        $('.champ_list .right').append($champ_select_right_wrapper);
+        $(".champselector").select2({
+          placeholder: "選択してくれ　　　　",
+          width: '80%',
+        });
         // $champ_select_wrapper.find('option[value='+ select_champ +']').remove();
       }
   });

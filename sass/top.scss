@@ -1,78 +1,152 @@
-$green : #185421;
+$green : #288c37;
+$button : #249978;
+$blue : #1F82A6;
+$bgcolor: rgb(27, 48, 66) ;
+$highlight:#3182a4;
 body {
+  margin : 0;
+  background-color: $bgcolor;
+  color : white;
+  font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+  font-size : 16px;
   .wrapper {
-    margin: 0 auto ;
-    width : 90%;
+    .text {
+      margin: 0 auto ;
+      width : 80%;
+    }
     form {
-      border : 1px solid;
+      padding : 0;
       .form_parts {
-         text-align : center;
-         h3 {
-           margin : 0;
-         }
-         .left{
-           width:50%;
-         }
-         .right{
-           width: 50%;
-         }
-         .champ_list {
-            display: flex;
-            text-align: left;
-            width: 90%;
-            margin: auto;
-            label {
-              width: 24%;
-              display: inline-block;
+        text-align : center;
+        width: 80%;
+        margin : 0 auto;
+        p.howto {
+          text-align: left;
+        }
+        h3 {
+          margin : 0;
+        }
+        .left{
+          width:50%;
+        }
+        .right{
+          width: 50%;
+        }
+        .champ_list {
+          display: flex;
+          text-align: left;
+          width: 90%;
+          margin: auto;
+          label {
+            width: 24%;
+            display: inline-block;
+          }
+          .champ_select_wrapper {
+            text-align: center;
+            margin : auto;
+            .select2-selection{
+              text-align: left;
+              margin-bottom: 10px;
             }
-         }
+          }
+        }
+      }
+      .add_menber {
+        background-color: $button;
+        color : white;
+        margin-bottom : 30px;
+        border : 0;
+        padding: 5px 10px;
+        border-radius : 5px;
+        font-weight : bold;
+        cursor :pointer;
       }
       #tab {
         list-style-type : none;
-        li {
-          display: inline-block;
+        ul {
+          margin : 5px auto;
+          // width :95%;
+          border-bottom :1px solid $button;
+          li {
+            display: inline-block;
+            border : 1px solid $button;
+            border-bottom: 0;
+            border-radius :5px 5px 0 0 ;
+            padding :5px 10px;
+            width:45%;
+            &.active {
+              background: $button;
+              a {
+                color :white;
+              }
+            }
+            a {
+              text-decoration: none;
+              color : $green ;
+              font-weight : bold;
+            }
+          }
         }
       }
       .submit_wrapper{
-         text-align : center;
-         button {
-           display: inline-block;
-           padding: 0 0 0 10px;
-           height: 50px;
-           width: 200px;
-           position: relative;
-           font-size: 20px;
-           background: $green;
-           border: 0;
-           cursor: pointer;
-           &::before{
-              content: ' ';
-              height: 0;
-              position: absolute;
-              width: 0;
-              border: 25px solid transparent;
-              border-left-color: white;
-              left: 0;
-              top: 0;
-           }
-           &::after {
-              content: ' ';
-              height: 0;
-              position: absolute;
-              width: 0;
-              border: 25px solid transparent;
-              border-left-color: $green;
-              left: 100%;
-              top: 0;
-           }
-         }
-       }
-     }
-   }
-   .red {
-      color : red;
+        text-align : center;
+        button {
+          display: inline-block;
+          padding: 0 0 0 10px;
+          margin : 15px;
+          height: 50px;
+          width: 200px;
+          position: relative;
+          font-size: 20px;
+          background: $green;
+          color : white;
+          border: 0;
+          cursor: pointer;
+          &::before{
+            content: ' ';
+            height: 0;
+            position: absolute;
+            width: 0;
+            border: 25px solid transparent;
+            border-left-color: $bgcolor;
+            left: 0;
+            top: 0;
+          }
+          &::after {
+            content: ' ';
+            height: 0;
+            position: absolute;
+            width: 0;
+            border: 25px solid transparent;
+            border-left-color: $green;
+            left: 100%;
+            top: 0;
+          }
+        }
+      }
     }
-    .hide {
-      display: none;
-    }
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    background-color: $bgcolor * 2;
+    width: 100%;
+    padding:3px;
+    text-align:center;
+  }
+  .red {
+    color : red;
+  }
+  .bold {
+    font-weight : bold;
+  }
+  .hide {
+    display: none;
+  }
+  .select2-results{
+    color :black;
+  }
+  .select2-results .select2-results__option.select2-results__option--highlighted {
+    background : $highlight !important;
+  }
 }
