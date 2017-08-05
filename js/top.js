@@ -1,6 +1,9 @@
 $(function(){
   $('#tab').tabslet();
   $('#champ').find('select').prop('disabled',true);
+  $('input').iCheck({
+      radioClass: 'iradio_square-green',
+  });
   $('#tab').on("_before" ,function(e){
       var active = $(e.target).find('a').attr('href');
       if (active == '#champ'){

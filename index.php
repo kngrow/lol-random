@@ -10,6 +10,7 @@ $rc = new RandomClass();
     <meta name="viewport" content="width=device-width" />
     <title>らんだむ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/green.css">
     <link rel="stylesheet" href="/css/top.css">
   </head>
   <body>
@@ -70,8 +71,10 @@ $rc = new RandomClass();
        </div>
        <div class="form_parts">
           <h3>map</h3>
+        <div class="map_wrapper">
           <label><input type="radio" name="map" value="sf" checked="checked">summoners lift</label>
           <label><input type="radio" name="map" value="ha" >howling abyss</label>
+         </div>
        </div>
        <div class="submit_wrapper">
          <button type ="submit">build!</button>
@@ -85,5 +88,6 @@ $rc = new RandomClass();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tabslet.js/1.7.3/jquery.tabslet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 <script src="js/top.js"></script>
 </html>

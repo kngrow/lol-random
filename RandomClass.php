@@ -125,7 +125,7 @@ class RandomClass
     $ori_champ = $this->ori_champ;
     foreach ($small as $champ => $item) {
       $cm = $ori_champ['data'][$champ];
-      $list[$cm['name']]['champ'] = [
+      $list[$i]['champ'] = [
         'name' => $cm['name'],
         'id' => $cm['id'],
         'image' => $cm['image']
@@ -140,7 +140,7 @@ class RandomClass
           'image' => $it['image'],
         ];
       }
-      $list[$cm['name']]['build'] = $arr;
+      $list[$i]['build'] = $arr;
       $i++;
     }
     return $list;
@@ -280,6 +280,8 @@ class RandomClass
     if($champ !== 'Cassiopeia'){
       $build['boots'] = array_rand($boot_list);
     }
+    // var_dump($item_)
+    $i = 0;
     foreach($build as $k => $item_id){
       if ($k === "boots") {
         $boots = $data['data'][$boot_list[$item_id]];
@@ -297,7 +299,7 @@ class RandomClass
         }
         // rangeチャンプはhydra系を積めない
         if( !$this->is_melee($champ) && ( $item_list[$item_id] == 3074 || $item_list[$item_id] == 3748 ) ){
-          $item_id = $this->withouthydraRottely($item_list);
+          $item_id = $this->withoutHydraRottely($item_list);
         }
         $tmp = $data['data'][$item_list[$item_id]];
         $arr = [
@@ -306,8 +308,9 @@ class RandomClass
           'from' => $tmp['from'],
           'image' => $tmp['image'],
         ];
-        $item[$item_list[$item_id]] = $arr;
+        $item[$i] = $arr;
       }
+      $i++;
     }
     return $item;
   }
@@ -320,9 +323,9 @@ class RandomClass
     $champ_data = $this->ori_champ['data'][$champ_id];
     return $champ_data['stats']['attackrange'] <= 175 ? true : false;
   }
-  /** 
+  /**
    * ハリケーンなしで１個返す
-   * @param array $item_list 
+   * @param array $item_list
    * @return array アイテムの配列の順番
    */
   public function withoutHurrycaneRottely($item_list){
