@@ -19,12 +19,12 @@ body {
       .form_parts {
         text-align : center;
         width: 80%;
-        margin : 0 auto;
+        margin :  auto;
         p.howto {
-          text-align: left;
+          text-align:15px left;
         }
         h3 {
-          margin : 0;
+          margin :5px 0;
         }
         .left{
           width:50%;
@@ -50,6 +50,12 @@ body {
             }
           }
         }
+        .map_wrapper {
+          margin:20px;
+          label {
+            margin:20px;
+          }
+        }
       }
       .add_menber {
         background-color: $button;
@@ -65,7 +71,6 @@ body {
         list-style-type : none;
         ul {
           margin : 5px auto;
-          // width :95%;
           border-bottom :1px solid $button;
           li {
             display: inline-block;
@@ -74,6 +79,7 @@ body {
             border-radius :5px 5px 0 0 ;
             padding :5px 10px;
             width:45%;
+            text-align : center;
             &.active {
               background: $button;
               a {
